@@ -4,6 +4,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <SourceLink>true</SourceLink>
+        <!-- Include the repo URL in the PDB -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <!-- Embed the actual source files into the PDB (optional but helpful for private repos) -->
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <!-- Emit portable PDBs which work best with SourceLink -->
+        <DebugType>full</DebugType>
+        <RepositoryUrl>https://github.com/shahabbahojb/Sentry_Integration.git</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,6 +20,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -26,6 +38,11 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
+        <PackageReference Include="Sentry.OpenTelemetry" Version="5.6.0" />
+        <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+        <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.11.2" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.1" />
+        <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.11.1" />
     </ItemGroup>
 
 </Project>

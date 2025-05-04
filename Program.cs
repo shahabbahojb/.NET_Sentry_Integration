@@ -1,6 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using SampleApp_Review;
 using SampleApp_Review.Utility;
+using Sentry.OpenTelemetry;
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
@@ -36,9 +41,19 @@ builder.WebHost.UseSentry(options =>
     options.TracesSampleRate = 1.0;
     options.ProfilesSampleRate = 1.0; // Enables profiling
     options.AddEntityFramework();
+    options.UseOpenTelemetry();
 });
-// optional explicit service registrations
 
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("weather.forecast"))
+    .WithTracing(tracing => tracing
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddSentry())
+    .WithMetrics(metrics => metrics
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation())
+    .UseOtlpExporter();
 
 var app = builder.Build();
 
