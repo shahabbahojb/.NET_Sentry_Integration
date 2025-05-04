@@ -1,0 +1,110 @@
+# Build results
+bin/
+obj/
+out/
+[Ll]og/
+[Ll]ogs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Publish Web Output
+*.publish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+# VS Code files
+*.code-workspace
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# Azure
+csx/
+*.build.csdef
+ecf/
+rcf/
+
+# DotCover
+*.dotCover
+
+# Test results
+TestResult.xml
+*.trx
+*.coverage
+*.coveragexml
+
+# Windows image file caches
+*.vcxproj.user
+*.pfx
+
+# Node.js (if you have a JS frontend)
+node_modules/
+wwwroot/node_modules/
+
+# Yarn & npm logs
+yarn.lock
+package-lock.json
+npm-debug.log*
+
+# Docker
+**/Dockerfile
+**/.dockerignore
+
+# Others
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.bak
+*.tmp
+*.swp
+~$*
+
+# Local NuGet packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+.nuget/
+
+# EF Core Migrations snapshot
+Migrations/*.Designer.cs
+
+# JetBrains Rider
+.idea/
+
+.env
