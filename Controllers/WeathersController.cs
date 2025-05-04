@@ -28,9 +28,7 @@ public class WeathersController(ApplicationDbContext context) : ControllerBase
                     summaries[Random.Shared.Next(summaries.Length)]
                 ))
             .ToArray();
-        SentrySdk.CaptureException(new Exception("Test exception"));
-
-        SentrySdk.CaptureMessage("Hello Sentry");
+        SentrySdk.CaptureException(new NullReferenceException("This is NullReferenceException"));
         return Ok(forecast);
     }
 }
