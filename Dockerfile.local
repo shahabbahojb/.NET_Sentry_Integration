@@ -1,0 +1,44 @@
+# Dockerfile for local development - builds from source
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+# Copy csproj and restore dependencies
+COPY SampleApp_Review/SampleApp_Review.csproj SampleApp_Review/
+RUN dotnet restore "SampleApp_Review/SampleApp_Review.csproj"
+
+# Copy everything else and build
+COPY . .
+WORKDIR "/src/SampleApp_Review"
+
+# Build and publish the application with debug symbols
+RUN dotnet publish "SampleApp_Review.csproj" \
+    --configuration Debug \
+    --output /app/publish \
+    --no-restore
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+WORKDIR /app
+
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Copy the published application
+COPY --from=build /app/publish .
+
+# Accept build args for Sentry release
+ARG SENTRY_RELEASE
+ENV SENTRY_RELEASE=$SENTRY_RELEASE
+
+# Expose port
+EXPOSE 8080
+
+# Set environment variables
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1
+
+ENTRYPOINT ["dotnet", "SampleApp_Review.dll"]
