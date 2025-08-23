@@ -4,14 +4,15 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <SourceLink>true</SourceLink>
-        <!-- Include the repo URL in the PDB -->
+
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>portable</DebugType>
+
+        <!-- SourceLink + embed source content into the PDB -->
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <!-- Embed the actual source files into the PDB (optional but helpful for private repos) -->
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <!-- Emit portable PDBs which work best with SourceLink -->
-        <DebugType>full</DebugType>
-        <RepositoryUrl>https://github.com/shahabbahojb/Sentry_Integration.git</RepositoryUrl>
+        <EmbedAllSources>true</EmbedAllSources>
     </PropertyGroup>
 
     <ItemGroup>
