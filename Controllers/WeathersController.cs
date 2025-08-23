@@ -5,16 +5,11 @@ namespace SampleApp_Review.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeathersController(ApplicationDbContext context) : ControllerBase
+public class WeathersController : ControllerBase
 {
-    
     [HttpGet("/get-weather-forecast")]
-    public async Task<ActionResult<IEnumerable<WeatherForecast>>> Get()
+    public Task<ActionResult<IEnumerable<WeatherForecast>>> Get()
     {
-
-
-        var t=await context.WeatherForecasts.ToListAsync();
-        
         var summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -28,7 +23,9 @@ public class WeathersController(ApplicationDbContext context) : ControllerBase
                     summaries[Random.Shared.Next(summaries.Length)]
                 ))
             .ToArray();
+        
         SentrySdk.CaptureException(new NullReferenceException("This is NullReferenceException"));
-        return Ok(forecast);
+        
+        return Task.FromResult<ActionResult<IEnumerable<WeatherForecast>>>(Ok(forecast));
     }
 }
